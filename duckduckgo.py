@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import urllib
-import urllib2
+import urllib3
+
 from xml.etree import ElementTree
 
 __version__ = 0.1
@@ -23,8 +24,8 @@ def query(query, useragent='python-duckduckgo 0.1'):
     params = urllib.urlencode({'q': query, 'o': 'x'})
     url = 'http://duckduckgo.com/?' + params
 
-    request = urllib2.Request(url, headers={'User-Agent': useragent})
-    response = urllib2.urlopen(request)
+    request = urllib3.Request(url, headers={'User-Agent': useragent})
+    response = urllib3.urlopen(request)
     xml = ElementTree.fromstring(response.read())
     response.close()
 
